@@ -8,7 +8,14 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  ForwardRefRenderFunction,
+  forwardRef,
+} from "react";
+
 import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 
@@ -23,13 +30,10 @@ type inputVariationOptions = {
   [key: string]: string;
 };
 
-export const Input = ({
-  name,
-  error = null,
-  icon: Icon,
-  label,
-  ...rest
-}: InputProps) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { name, error = null, icon: Icon, label, ...rest },
+  ref
+) => {
   const inputVariation: inputVariationOptions = {
     error: "red.500",
     default: "gray.200",
@@ -37,9 +41,9 @@ export const Input = ({
     filled: "green.500",
   };
 
-  const [variation, setVariation] = useState("default");
+  const [value, setValue] = useState("");
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [variation, setVariation] = useState("default");
 
   useEffect(() => {
     if (error) {
@@ -54,10 +58,10 @@ export const Input = ({
   }, [error]);
 
   const handleInputBlur = useCallback(() => {
-    if (inputRef.current?.value && !error) {
+    if (value.length > 1 && !error) {
       return setVariation("filled");
     }
-  }, [error]);
+  }, [error, value]);
 
   return (
     <FormControl isInvalid={!!error}>
@@ -69,11 +73,13 @@ export const Input = ({
           </InputLeftElement>
         )}
         <ChakraInput
+          ref={ref}
           {...rest}
           name={name}
           bg="gray.50"
           onFocus={handleInputFocus}
           onBlurCapture={handleInputBlur}
+          onChangeCapture={(e) => setValue(e.currentTarget.value)}
           color={inputVariation[variation]}
           borderColor={inputVariation[variation]}
           variant="outline"
@@ -87,3 +93,5 @@ export const Input = ({
     </FormControl>
   );
 };
+
+export const Input = forwardRef(InputBase);
