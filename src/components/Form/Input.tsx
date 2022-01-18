@@ -65,7 +65,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
   return (
     <FormControl isInvalid={!!error}>
-      {!!label && <FormLabel>{label}</FormLabel>}
+      {!!label && <FormLabel color="gray.400">{label}</FormLabel>}
       <InputGroup flexDirection="column">
         {Icon && (
           <InputLeftElement mt="2.5" color={inputVariation[variation]}>
@@ -84,7 +84,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           borderColor={inputVariation[variation]}
           variant="outline"
           _hover={{ bgColor: "gray.100" }}
-          _placeholder={{ color: "gray.300" }}
+          _placeholder={{ color: "gray.400" }}
           size="lg"
           h="60px"
         />
