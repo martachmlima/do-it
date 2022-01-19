@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaForward } from "react-icons/fa";
 import PrimLogo from "../../assets/logo-prim.svg";
-import LogoMin from "../../assets/logo-min.svg";
+import LogoMin from "../../assets/logo-secondary.svg";
 
 export const SignUpInfo = () => {
   return (

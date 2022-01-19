@@ -4,8 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { LogInInfo } from "./LoginInfo";
-import { LogInForm } from "./LoginForm";
+import { LoginInfo } from "./LoginInfo";
+import { LoginForm } from "./LoginForm";
 
 const signInSchema = yup.object().shape({
   email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -57,9 +57,9 @@ export const LogIn = () => {
         flexDirection={["column", "column", "row", "row"]}
         alignItems="center"
       >
-        <LogInInfo />
+        <LoginInfo />
 
-        <LogInForm
+        <LoginForm
           errors={errors}
           handleSignIn={handleSubmit(handleSignIn)}
           loading={loading}
