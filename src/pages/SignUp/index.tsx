@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
 import { SignUpForm } from "./SignUpForm";
 import { SignUpInfo } from "./SingUpInfo";
 import { GoBackButton } from "./GoBackButton";
